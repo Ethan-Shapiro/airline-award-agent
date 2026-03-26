@@ -1,0 +1,23 @@
+{
+  "name": "airline-award-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Multi-agent award flight search system powered by OpenClaw",
+  "scripts": {
+    "poll-mfa": "tsx scripts/poll-mfa.ts",
+    "parse:united": "tsx scripts/parse-united.ts",
+    "parse:delta": "tsx scripts/parse-delta.ts",
+    "parse:american": "tsx scripts/parse-american.ts"
+  },
+  "dependencies": {
+    "agentmail": "latest",
+    "js-yaml": "latest"
+  },
+  "devDependencies": {
+    "tsx": "latest",
+    "typescript": "latest",
+    "@types/js-yaml": "latest",
+    "@types/node": "latest"
+  }
+}

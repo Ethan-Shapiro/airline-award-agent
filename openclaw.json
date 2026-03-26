@@ -1,0 +1,28 @@
+{
+  "agents": {
+    "defaults": {
+      "model": "openai/gpt-5.4-mini",
+      "workspace": ".",
+      "tools": ["browser", "exec", "file_read", "file_write"],
+      "subagents": {
+        "maxSpawnDepth": 1,
+        "maxConcurrent": 8,
+        "maxChildrenPerAgent": 5,
+        "model": "google/gemini-3-flash-preview",
+        "runTimeoutSeconds": 300
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "dmPolicy": "allowlist",
+      "allowFrom": []
+    }
+  },
+  "browser": {
+    "headless": true,
+    "timeout": 60
+  }
+}

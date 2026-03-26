@@ -1,0 +1,32 @@
+united:
+  name: "United Airlines"
+  login_url: "https://www.united.com/en/us"
+  award_search_url: "https://www.united.com/ual/en/us/flight-search/book-a-flight/results/awd"
+  mfa_sender_filter: "@united.com"
+  credentials_env: "UNITED_CREDENTIALS"
+  parser_script: "scripts/parse-united.ts"
+  notes: |
+    United uses a "Book with miles" toggle on the search form.
+    MFA emails come from noreply@united.com with subject containing "verification code".
+
+delta:
+  name: "Delta Air Lines"
+  login_url: "https://www.delta.com/"
+  award_search_url: "https://www.delta.com/flight-search/search"
+  mfa_sender_filter: "@delta.com"
+  credentials_env: "DELTA_CREDENTIALS"
+  parser_script: "scripts/parse-delta.ts"
+  notes: |
+    Delta uses a "Shop with Miles" checkbox on the search form.
+    MFA emails come from DeltaAirLines@t.delta.com.
+
+american:
+  name: "American Airlines"
+  login_url: "https://www.aa.com/homePage.do"
+  award_search_url: "https://www.aa.com/booking/find-flights"
+  mfa_sender_filter: "@aa.com"
+  credentials_env: "AMERICAN_CREDENTIALS"
+  parser_script: "scripts/parse-american.ts"
+  notes: |
+    American uses a "Redeem miles" option on the booking page.
+    MFA emails come from notify@aa.com.
