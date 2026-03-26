@@ -20,20 +20,32 @@ If any field is ambiguous or missing, ask the user to clarify before proceeding.
 
 ## Search Workflow
 
-1. Read `config/airlines.yaml` to load details for each requested airline
-2. For each airline, spawn a sub-agent using `sessions_spawn`:
+1. Read `config/airlines.yaml` to load details for each requested airline.
 
-```
-sessions_spawn({
-  task: "Search for award flights on <airline_name>.\n\n- Login URL: <login_url>\n- Credentials env var: <credentials_env>\n- MFA sender filter: <mfa_sender_filter>\n- Search: <origin> → <destination>, <date>, <cabin_class>\n- Parser script: <parser_script>\n\nFollow the airline-search skill for the browser workflow.\nFollow the mfa-agentmail skill if MFA is encountered.\nReturn results as a JSON array of objects with fields: airline, flightNumber, departure, arrival, origin, destination, cabinClass, milesCost, taxesFees, stops, availableSeats.",
-  label: "<airline_key>-search",
-  runTimeoutSeconds: 300
-})
-```
+2. For each airline, you MUST call the `sessions_spawn` tool with these parameters:
+   - **task** — A single string containing all of the following: the airline name, login URL, credentials env var name, MFA sender filter, search route (origin → destination), date, cabin class, and parser script path. The task must instruct the sub-agent to follow the `airline-search` skill for the browser workflow and the `mfa-agentmail` skill if MFA is encountered. The task must instruct the sub-agent to return results as a JSON array of objects with fields: airline, flightNumber, departure, arrival, origin, destination, cabinClass, milesCost, taxesFees, stops, availableSeats.
+   - **label** — Use the pattern `<airline_key>-search` (e.g., `"united-search"`)
+   - **runTimeoutSeconds** — `300`
 
-3. Spawn all airline sub-agents before waiting — they run in parallel
-4. As each sub-agent announces its results, collect them
-5. Once all sub-agents have reported (or timed out), aggregate and respond
+   Here is an example task string for United (substitute the real values from airlines.yaml and the user's search request):
+
+   > Search for award flights on United Airlines.
+   >
+   > - Login URL: https://www.united.com/en/us
+   > - Credentials env var: UNITED_CREDENTIALS
+   > - MFA sender filter: @united.com
+   > - Search: SFO → NRT, 2026-05-01, business
+   > - Parser script: scripts/parse-united.ts
+   >
+   > Follow the airline-search skill for the browser workflow.
+   > Follow the mfa-agentmail skill if MFA is encountered.
+   > Return results as a JSON array of objects with fields: airline, flightNumber, departure, arrival, origin, destination, cabinClass, milesCost, taxesFees, stops, availableSeats.
+
+3. Spawn ALL airline sub-agents before waiting — they run in parallel. Do not wait for one to finish before spawning the next.
+
+4. As each sub-agent announces its results, collect them.
+
+5. Once all sub-agents have reported (or timed out), aggregate and respond.
 
 ## Formatting Results
 

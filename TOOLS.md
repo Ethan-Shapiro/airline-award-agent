@@ -35,6 +35,7 @@ All scripts are in the `scripts/` directory and run via `npx tsx`:
 
 - **parse-delta.ts** — Same as above for Delta
 - **parse-american.ts** — Same as above for American Airlines
+- **parse-air-canada.ts** — Same as above for Air Canada (matches `AC` flight numbers and Aeroplan points)
 
 ## Configuration
 
