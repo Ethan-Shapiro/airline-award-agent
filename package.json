@@ -8,7 +8,8 @@
     "poll-mfa": "tsx scripts/poll-mfa.ts",
     "parse:united": "tsx scripts/parse-united.ts",
     "parse:delta": "tsx scripts/parse-delta.ts",
-    "parse:american": "tsx scripts/parse-american.ts"
+    "parse:american": "tsx scripts/parse-american.ts",
+    "parse:air-canada": "tsx scripts/parse-air-canada.ts"
   },
   "dependencies": {
     "agentmail": "latest",

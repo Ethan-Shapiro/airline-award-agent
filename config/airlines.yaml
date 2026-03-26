@@ -30,3 +30,14 @@ american:
   notes: |
     American uses a "Redeem miles" option on the booking page.
     MFA emails come from notify@aa.com.
+
+air-canada:
+  name: "Air Canada"
+  login_url: "https://www.aircanada.com/aeroplan/login"
+  award_search_url: "https://www.aircanada.com/aeroplan/redeem/availability/outbound"
+  mfa_sender_filter: "@aircanada.com"
+  credentials_env: "AIRCANADA_CREDENTIALS"
+  parser_script: "scripts/parse-air-canada.ts"
+  notes: |
+    Air Canada uses Aeroplan points. The search form has a "Use Aeroplan Points" toggle.
+    MFA emails come from noreply@aircanada.com.
